@@ -9,7 +9,7 @@ import os
 from chat.memory import SqliteMemory
 from tools import (
     ImageFoodAnalyzerTool,
-    # DietPlanTool,
+    DietPlanTool,
     # MealEntryTool,
     # ReportTool,
     UserRegistrationTool,
@@ -45,7 +45,7 @@ class NutritionistAgent:
         
         self.tools = [
             ImageFoodAnalyzerTool(),
-            # DietPlanTool(),
+            DietPlanTool(),
             # MealEntryTool(),
             # ReportTool(),
             UserRegistrationTool(),
