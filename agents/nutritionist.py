@@ -7,15 +7,15 @@ from dotenv import load_dotenv
 import os
 
 from chat.memory import SqliteMemory
-# from tools import (
-#     FoodImageAnalyzerTool,
-#     DietPlanTool,
-#     MealEntryTool,
-#     ReportTool,
-#     UserRegistrationTool,
-#     WeightUpdateTool,
-#     UserInfoTool
-#     )
+from tools import (
+    ImageFoodAnalyzerTool,
+    # DietPlanTool,
+    # MealEntryTool,
+    # ReportTool,
+    # UserRegistrationTool,
+    # WeightUpdateTool,
+    # UserInfoTool
+    )
 
 load_dotenv()
 
@@ -44,7 +44,7 @@ class NutritionistAgent:
         self.memory = SqliteMemory(session_id).history
         
         self.tools = [
-            # FoodImageAnalyzerTool(),
+            ImageFoodAnalyzerTool(),
             # DietPlanTool(),
             # MealEntryTool(),
             # ReportTool(),
