@@ -2,7 +2,7 @@ from pydantic import BaseModel
 class User(BaseModel):
     telegraId: int
     name: str
-    sexo: str
+    sex: str
     age: int
     height_cm: int
     weight_kg: float
