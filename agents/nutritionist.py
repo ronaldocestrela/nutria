@@ -12,9 +12,9 @@ from tools import (
     # DietPlanTool,
     # MealEntryTool,
     # ReportTool,
-    # UserRegistrationTool,
+    UserRegistrationTool,
     # WeightUpdateTool,
-    # UserInfoTool
+    UserInfoTool
     )
 
 load_dotenv()
@@ -48,9 +48,9 @@ class NutritionistAgent:
             # DietPlanTool(),
             # MealEntryTool(),
             # ReportTool(),
-            # UserRegistrationTool(),
+            UserRegistrationTool(),
             # WeightUpdateTool(),
-            # UserInfoTool()
+            UserInfoTool()
         ]
         
         self.agent = initialize_agent(

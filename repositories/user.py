@@ -13,7 +13,7 @@ class UserRepository(BaseRepository):
     
     def create_user(
         self,
-        telegraId: int,
+        telegra_id: int,
         name: str,
         sex: str,
         age: int,
@@ -23,7 +23,7 @@ class UserRepository(BaseRepository):
         goal: str
     ) -> User:
         user = User(
-            telegraId=telegraId,
+            telegra_id=telegra_id,
             name=name,
             sex=sex,
             age=age,
@@ -46,7 +46,7 @@ class UserRepository(BaseRepository):
     
     def update_user(self, 
                     user_id: int,
-                    telegraId: int,
+                    telegra_id: int,
                     name: str,
                     sex: str,
                     age: int,
@@ -59,7 +59,7 @@ class UserRepository(BaseRepository):
         Update user information.
         """
         updated_user = {
-            'telegraId': telegraId,
+            'telegra_id': telegra_id,
             'name': name,
             'sex': sex,
             'age': age,
@@ -85,11 +85,11 @@ class UserRepository(BaseRepository):
         users = self.user_table.all()
         return [User(**user) for user in users] if users else []
 
-    # def get_user_by_username(self, username: str) -> Optional[User]:
-    #     """
-    #     Get a user by username.
-    #     """
-    #     user = self.table.get(Query().username == username)
-    #     if user:
-    #         return User(**user)
-    #     return None
+    def get_user_by_telegram_id(self, telegra_id: str) -> Optional[User]:
+        """
+        Get a user by telegra_id.
+        """
+        user = self.table.get(Query().telegra_id == telegra_id)
+        if user:
+            return User(**user)
+        return None
