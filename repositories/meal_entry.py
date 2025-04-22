@@ -3,7 +3,7 @@ from typing import List, Optional
 from tinydb import Query
 from datetime import datetime
 from models import MealEntry
-from base_repository import BaseRepository
+from .base_repository import BaseRepository
 
 class MealEntryRepository(BaseRepository):
     """

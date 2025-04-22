@@ -35,7 +35,8 @@ class TelegramBot:
         self.logger.info("Bot configurado com sucesso.")
     
     def _setup_handlers(self):
-        start_handler = MessageHandler(filters.command("start"), self.start_bot & filters.private)
+        start_handler = MessageHandler(self.start_bot,
+            filters.command("start") & filters.private)
         text_filter = filters.text & filters.private
         message_handler = MessageHandler(self.handle_message, text_filter)
         photo_filter = filters.photo & filters.private

@@ -1,7 +1,7 @@
 from typing import List, Optional
 from tinydb import Query
 from datetime import datetime
-from base_repository import BaseRepository
+from .base_repository import BaseRepository
 from models import WeightHistory
 
 class WeightHistoryRepository(BaseRepository):
