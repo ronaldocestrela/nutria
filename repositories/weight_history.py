@@ -1,7 +1,7 @@
 from typing import List, Optional
 from tinydb import Query
 from datetime import datetime
-from base_repository import BaseRepository
+from .base_repository import BaseRepository
 from models import WeightHistory
 
 class WeightHistoryRepository(BaseRepository):
@@ -77,3 +77,16 @@ class WeightHistoryRepository(BaseRepository):
         results = self.weight_history_table.all()
         
         return [WeightHistory(**entry) for entry in results] if results else []
+    
+    def get_weight_history_by_user(self, user_id: int) -> List[WeightHistory]:
+        """
+        Get weight history by user ID and date.
+        """
+        
+        WeightHistoryQuery = Query()
+        results = self.weight_history_table.search(
+            (WeightHistoryQuery.user_id == user_id)
+        )
+        sorted_results = sorted(results, key=lambda x: x['timestamp'], reverse=True)
+        
+        return sorted_results

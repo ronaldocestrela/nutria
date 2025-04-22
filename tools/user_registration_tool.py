@@ -9,7 +9,7 @@ class UserRegistrationTool(BaseTool):
     description: str = (
     "Use esta ferramenta para registrar um novo usuário ou atualizar as informações de um usuário existente. "
     "Esta ferramenta requer os seguintes dados do usuário: "
-    "name (nome), sex (sexo), age (idade como um int), height_cm (altura em centímetros como um float), weight_kg (peso em quilogramas como um float), "
+    "telegram_id, name (nome), sex (sexo), age (idade como um int), height_cm (altura em centímetros como um float), weight_kg (peso em quilogramas como um float), "
     "has_diabetes (se tem diabetes: bool onde true para sim e false para não) e goal (objetivo: perder peso, ganhar peso, ganhar massa muscular). "
     "Forneça esses dados no formato de um dicionário python com as seguintes chaves: "
     "'name', 'sex', 'age', 'height_cm', 'weight_kg', 'has_diabetes', e 'goal'. "
@@ -58,7 +58,16 @@ class UserRegistrationTool(BaseTool):
         except Exception as e:
             return f"Erro ao registrar o usuário: {str(e)}"
 
-    async def _arun(self, user_data: Dict[str: Any]) -> str:
+    async def _arun(self, 
+        telegra_id: int,
+        name: str,
+        sex: str,
+        age: int,
+        height_cm: int,
+        weight_kg: float,
+        has_diabetes: bool,
+        goal: str,
+    ) -> str:
         """
         Asynchronous version of the run method.
         """

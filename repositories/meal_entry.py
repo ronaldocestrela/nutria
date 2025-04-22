@@ -1,8 +1,9 @@
+import json
 from typing import List, Optional
 from tinydb import Query
 from datetime import datetime
 from models import MealEntry
-from base_repository import BaseRepository
+from .base_repository import BaseRepository
 
 class MealEntryRepository(BaseRepository):
     """
@@ -32,7 +33,7 @@ class MealEntryRepository(BaseRepository):
             fats=fats,
         )
         
-        self.meal_entry_table.insert(new_meal_entry.model_dump())
+        self.meal_entry_table.insert(json.loads(new_meal_entry.model_dump_json()))
         return new_meal_entry
     
     def get_meal_entry_by_user_and_date(self, user_id: int, date: datetime) -> List[MealEntry]:
@@ -72,3 +73,13 @@ class MealEntryRepository(BaseRepository):
         results = self.meal_entry_table.all()
         
         return [MealEntry(**entry) for entry in results] if results else []
+    
+    def get_meal_entry_by_user_id(self, user_id: int) -> Optional[MealEntry]:
+        """
+        Get a meal entry by ID.
+        """
+        MealEntryQuery = Query()
+        result = self.meal_entry_table.search(MealEntryQuery.user_id == user_id)
+        
+        # return MealEntry(**result) if result else None
+        return result

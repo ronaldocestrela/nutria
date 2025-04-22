@@ -2,6 +2,7 @@ from typing import Optional, List
 from tinydb import Query
 from repositories.base_repository import BaseRepository
 from models import DietPlan
+import json
 
 class DietPlanRepository(BaseRepository):
     """
@@ -13,15 +14,15 @@ class DietPlanRepository(BaseRepository):
     
     def create_diet_plan(
         self,
-        user_id: int,
+        telegram_id: int,
         details: str,
     ) -> DietPlan:
         new_diet_plan = DietPlan(
-            user_id=user_id,
+            user_id=telegram_id,
             details=details
         )
         
-        self.diet_plan_table.insert(new_diet_plan.model_dump())
+        self.diet_plan_table.insert(json.loads(new_diet_plan.model_dump_json()))
         return new_diet_plan
     
     def get_dite_plan_by_id(self, diet_plan_id: int) -> Optional[DietPlan]:
@@ -42,12 +43,12 @@ class DietPlanRepository(BaseRepository):
         
         return [DietPlan(**result) for result in results] if results else []
     
-    def get_latest_diet_plan_by_user_id(self, user_id: int) -> Optional[DietPlan]:
+    def get_latest_diet_plan_by_user_id(self, telegram_id: int) -> Optional[DietPlan]:
         """
         Get the latest diet plan for a specific user.
         """
         DietPlanQuery = Query()
-        diet_plans = self.diet_plan_table.search(DietPlanQuery.user_id == user_id)
+        diet_plans = self.diet_plan_table.search(DietPlanQuery.telegram_id == telegram_id)
         
         if diet_plans:
             latest_diet_plan = sorted(diet_plans, key=lambda x: x['created_at'], reverse=True)[0]

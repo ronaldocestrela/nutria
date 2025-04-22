@@ -13,7 +13,7 @@ class UserRepository(BaseRepository):
     
     def create_user(
         self,
-        telegra_id: int,
+        telegram_id: int,
         name: str,
         sex: str,
         age: int,
@@ -23,7 +23,7 @@ class UserRepository(BaseRepository):
         goal: str
     ) -> User:
         user = User(
-            telegra_id=telegra_id,
+            telegram_id=telegram_id,
             name=name,
             sex=sex,
             age=age,
@@ -45,8 +45,7 @@ class UserRepository(BaseRepository):
         return User(**result) if result else None
     
     def update_user(self, 
-                    user_id: int,
-                    telegra_id: int,
+                    telegram_id: int,
                     name: str,
                     sex: str,
                     age: int,
@@ -59,7 +58,7 @@ class UserRepository(BaseRepository):
         Update user information.
         """
         updated_user = {
-            'telegra_id': telegra_id,
+            'telegram_id': telegram_id,
             'name': name,
             'sex': sex,
             'age': age,
@@ -69,7 +68,7 @@ class UserRepository(BaseRepository):
             'goal': goal
         }
         UserQuery = Query()
-        self.user_table.update(updated_user, UserQuery.id == user_id)
+        self.user_table.update(updated_user, UserQuery.id == telegram_id)
     
     def delete_user(self, user_id: int) -> None:
         """
@@ -85,11 +84,11 @@ class UserRepository(BaseRepository):
         users = self.user_table.all()
         return [User(**user) for user in users] if users else []
 
-    def get_user_by_telegram_id(self, telegra_id: str) -> Optional[User]:
+    def get_user_by_telegram_id(self, telegram_id: str) -> Optional[User]:
         """
-        Get a user by telegra_id.
+        Get a user by telegram_id.
         """
-        user = self.table.get(Query().telegra_id == telegra_id)
+        user = self.table.get(Query().telegram_id == telegram_id)
         if user:
             return User(**user)
         return None
