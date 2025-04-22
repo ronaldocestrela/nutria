@@ -10,10 +10,10 @@ from chat.memory import SqliteMemory
 from tools import (
     ImageFoodAnalyzerTool,
     DietPlanTool,
-    # MealEntryTool,
+    MealEntryTool,
     # ReportTool,
     UserRegistrationTool,
-    # WeightUpdateTool,
+    WeightUpdateTool,
     UserInfoTool
     )
 
@@ -46,10 +46,10 @@ class NutritionistAgent:
         self.tools = [
             ImageFoodAnalyzerTool(),
             DietPlanTool(),
-            # MealEntryTool(),
+            MealEntryTool(),
             # ReportTool(),
             UserRegistrationTool(),
-            # WeightUpdateTool(),
+            WeightUpdateTool(),
             UserInfoTool()
         ]
         

@@ -21,11 +21,11 @@ class WeightUpdateTool(BaseTool):
                 return "Usuário não encontrado. Pro favor, registre o usuário primeiro."
             
             # Create a new weight entry
-            self._weight_history_repository.create_weight_history(user.id, weight_kg)
-            return "Peso registrado com sucesso."
+            self._weight_history_repository.create_weight_history(telegram_id, weight_kg)
+            return f"Peso atualizado com sucesso para {user.name}"
         
         except Exception as e:
-            return f"Erro ao processar a solicitação: {str(e)}"
+            return f"Erro ao processar a solicitação de atualização de peso: {str(e)}"
     
     async def _arun(self, telegram_id: str, weight_kg: float) -> str:
         raise NotImplementedError("WeightUpdateTool does not support async run.")

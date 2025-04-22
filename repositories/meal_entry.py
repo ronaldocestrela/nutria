@@ -1,3 +1,4 @@
+import json
 from typing import List, Optional
 from tinydb import Query
 from datetime import datetime
@@ -32,7 +33,7 @@ class MealEntryRepository(BaseRepository):
             fats=fats,
         )
         
-        self.meal_entry_table.insert(new_meal_entry.model_dump())
+        self.meal_entry_table.insert(json.loads(new_meal_entry.model_dump_json()))
         return new_meal_entry
     
     def get_meal_entry_by_user_and_date(self, user_id: int, date: datetime) -> List[MealEntry]:
