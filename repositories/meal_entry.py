@@ -73,3 +73,13 @@ class MealEntryRepository(BaseRepository):
         results = self.meal_entry_table.all()
         
         return [MealEntry(**entry) for entry in results] if results else []
+    
+    def get_meal_entry_by_user_id(self, user_id: int) -> Optional[MealEntry]:
+        """
+        Get a meal entry by ID.
+        """
+        MealEntryQuery = Query()
+        result = self.meal_entry_table.search(MealEntryQuery.user_id == user_id)
+        
+        # return MealEntry(**result) if result else None
+        return result

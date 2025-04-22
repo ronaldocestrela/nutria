@@ -11,7 +11,7 @@ from tools import (
     ImageFoodAnalyzerTool,
     DietPlanTool,
     MealEntryTool,
-    # ReportTool,
+    ReportTool,
     UserRegistrationTool,
     WeightUpdateTool,
     UserInfoTool
@@ -47,7 +47,7 @@ class NutritionistAgent:
             ImageFoodAnalyzerTool(),
             DietPlanTool(),
             MealEntryTool(),
-            # ReportTool(),
+            ReportTool(),
             UserRegistrationTool(),
             WeightUpdateTool(),
             UserInfoTool()
