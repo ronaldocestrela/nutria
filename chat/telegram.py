@@ -55,20 +55,21 @@ class TelegramBot:
     async def handle_message(self, client: Client, message: Message):
         user_id = message.from_user.id
         user_input = message.text
+        user_name = message.from_user.username
         
-        await client.send_chat_action(caht_id=user_id, action=ChatAction.TYPING)
+        await client.send_chat_action(chat_id=user_id, action=ChatAction.TYPING)
         
         agent = NutritionistAgent(session_id=str(user_id))
         
         try:
-            response = await agent.run(f"telegram_id: {user_id} " + f"mensagem: {user_input}")
+            response = await agent.run(f"telegram_id: {user_name} " + f"mensagem: {user_input}")
         
         except Exception as e:
             self.logger.error(f"Erro ao processar a mensagem do usuário {user_id}: {e}", exc_info=True)
             response = "Desculpe, ocorreu um erro ao processar sua mensagem. Tente novamente mais tarde."
         
         await message.reply_text(response)
-        self.logger.info(f"Resposta enviada para o usuário {user_id}: {response}")
+        self.logger.info(f"Resposta enviada para o usuário {user_name}: {response}")
     
     async def handle_photo(self, client: Client, message: Message):
         user_id = message.from_user.id
